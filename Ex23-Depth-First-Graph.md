@@ -1,35 +1,67 @@
-# Ex23 Depth First Graph
-## DATE:
+# Ex23 Breadth-First Search (BFS) Traversal of a City Junction Map
+
 ## AIM:
-To compose the code for the function createNode to traverse the graph below in the depth first fashion.
-
-![image](https://github.com/user-attachments/assets/63552824-d0a3-49c6-a473-6db27d1f03e4)
-
+To design and implement a java program to perform Breadth-First Search (BFS) traversal on a city’s junction map represented as a graph, and find all reachable locations from a given source junction.
 ## Algorithm
-1. Allocate Memory: Use malloc to allocate memory for a new node of type struct node.
-2. Initialize Vertex: Set the vertex field of the new node to the value v.
-3. Initialize Next Pointer: Set the next pointer of the new node to NULL.
-4. Return Node: Return the pointer to the newly created node.
-5. End Function: Complete the function execution.  
+1. Start the program.
+2. Read two integers.
+3. Create an adjacency list g of size n.
+4. Repeat e times.
+5. Read the source node.
+6. Initialize a boolean array of size n, all set to false.
+7. Create an empty queue.
+8. Mark src as visited and enqueue it.
+9. Continue until all reachable nodes are processed.
+10. Stop the program.  
 
 ## Program:
 ```
 /*
-Program to traverse the graph below in the depth first fashion
+Program to perform Breadth-First Search (BFS) traversal on a city’s junction map represented as a graph
+Developed by: LEVAKU LAKSHMI MOUNIKA
+RegisterNumber: 212223100026
+import java.util.*;
 
-*/
-struct node* createNode(int v) {
-  struct node* newNode = malloc(sizeof(struct node));
-  newNode->vertex = v;
-  newNode->next = NULL;
-  return newNode;
+public class EmergencyRouteBFS {
+    public static void addEdge(List<List<Integer>> g, int u, int v) {
+        g.get(u).add(v);
+        g.get(v).add(u);
+    }
+
+    public static void bfs(List<List<Integer>> g, int src, boolean[] visited) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(src);
+        visited[src] = true;
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            System.out.print(curr + " ");
+            for (int neighbor : g.get(curr)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    q.offer(neighbor);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(), e = sc.nextInt();
+        List<List<Integer>> g = new ArrayList<>();
+        for (int i = 0; i < n; i++) g.add(new ArrayList<>());
+        for (int i = 0; i < e; i++) addEdge(g, sc.nextInt(), sc.nextInt());
+        int src = sc.nextInt();
+        bfs(g, src, new boolean[n]);
+    }
 }
+*/
 ```
 
 ## Output:
+<img width="464" height="325" alt="image" src="https://github.com/user-attachments/assets/ba67be71-eb74-438b-8171-68be3a1a498e" />
 
-![image](https://github.com/user-attachments/assets/b908ec95-f9d0-4d44-a664-90fbe0d748f6)
 
 
 ## Result:
-Thus, the C code for the function createNode to traverse the graph below in the depth first fashion is implemented successfully
+The program has been successfully implemented and executed.
+It performs Breadth-First Search (BFS) traversal on a city junction map and correctly lists all reachable locations from the given source node.
