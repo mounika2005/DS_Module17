@@ -1,44 +1,72 @@
-# Ex22 Breadth First Graph
-## DATE:
+# Ex22 Searching for a Book ID in a Binary Search Tree (BST)
+
 ## AIM:
-To write a printQueue C function of the given graph that is to be traversed in the breadth first manner.
-
-![image](https://github.com/user-attachments/assets/f483f48c-6af0-4027-a993-01c108a50933)
-
-
+To design and implement java program that constructs a Binary Search Tree (BST) using given Book IDs and checks whether a specific Book ID exists in the BST.
 ## Algorithm
-1. Start the program.
-2. Check if the queue is empty using isEmpty(q). If true, print "Queue is empty".
-3. If not empty, print "Queue contains ".
-4. Initialize a loop variable i to q->front.
-5. Use a for loop to iterate from q->front to q->rear, printing each item in q->items[i].
-6. End the loop and function after printing all items.
-7. End the program.  
+1.Start the program.
+2.Read integer.
+3.Initialize root equals to null.
+4.Repeat n times.
+5.Insert(root, key).
+6.Searching Book ID.
+7.Search(root, key).
+8.Stop the program.   
 
 ## Program:
 ```
 /*
-Program to traverse graph using BFS
+Program to constructs a Binary Search Tree (BST) using given Book IDs 
+Developed by: LEVAKU LAKSHMI MOUNIKA
+RegisterNumber: 212223100026
+import java.util.*;
+
+public class BookIDSearch {
+    static class Node {
+        int data;
+        Node left, right;
+        Node(int data) {
+            this.data = data;
+        }
+    }
+
+    public static Node insert(Node root, int key) {
+        if (root == null) return new Node(key);
+        if (key < root.data) root.left = insert(root.left, key);
+        else root.right = insert(root.right, key);
+        return root;
+    }
+
+    public static boolean search(Node root, int key) {
+        if (root == null) return false;
+        if (root.data == key) return true;
+        if (key < root.data) return search(root.left, key);
+        else return search(root.right, key);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Node root = null;
+        for (int i = 0; i < n; i++) {
+            root = insert(root, sc.nextInt());
+        }
+        int q = sc.nextInt();
+        while (q-- > 0) {
+            int key = sc.nextInt();
+            System.out.println(search(root, key) ? "Found" : "Not Found");
+        }
+    }
+}
 
 */
-void printQueue(struct queue* q) {
-  int i = q->front;
- 
-  if (isEmpty(q)) {
-    printf("Queue is empty");
-  } else { 
-    printf("Queue contains ");
-    for (i = q->front; i < q->rear + 1; i++) {
-      printf("%d ", q->items[i]);
-    }
-   }
-}
 ```
 
 ## Output:
+<img width="629" height="386" alt="image" src="https://github.com/user-attachments/assets/1fff4894-1ba7-47c1-8e93-b41931c40654" />
 
-![image](https://github.com/user-attachments/assets/0d04d2af-0fc0-459a-b584-f6e9b5736bd4)
+
 
 
 ## Result:
-Thus, the code for the printQueue function of the following graph that is to be traversed in the breadth first manner is implemented successfully.
+The program has been successfully implemented and executed.
+It constructs a Binary Search Tree from the given Book IDs and accurately determines whether a queried Book ID exists in the library system.
