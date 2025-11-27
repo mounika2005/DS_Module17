@@ -1,63 +1,94 @@
-# Ex21 Representation of Graph
-## DATE:
+# Ex21 Count the Number of Nodes in the Left Subtree of a Binary Tree
+
 ## AIM:
-To write a C program to display the adjacency matrix of the given graph by supplying the edges and the number of vertices.
+To design and implement a java program that constructs a binary tree from given level order input and counts the number of nodes present in the left subtree of the root node
 
 ## Algorithm
-1. Start the program.
-2. Read the value of V (number of vertices).
-3. Declare an adjacency matrix adjMatrix[V][V].
-4. Initialize the matrix to 0 using the init function. 
-5. Calculate the maximum number of edges me as n * (n - 1) / 2.
-6. For each edge, read e1 and e2, add the edge to the adjacency matrix, and stop if e1 == -1 && e2 == -1.
-7. Print the adjacency matrix.
-8. End the program.
+1.Start the program.
+
+2.Read integer.
+
+3.Create an array of size n.
+
+4.Read n integers and store them in array.
+
+5.Building the Tree (Level-Order).
+
+6.Counting Left Subtree Nodes.
+
+7.Print the result.
+
+8.Stop the program.  
 
 ## Program:
 ```
+/*
+Program to constructs a binary tree from given level order input and counts the number of nodes 
+Developed by: LEVAKU LAKSHMI MOUNIKA
+RegisterNumber: 212223100026
+import java.util.*;
 
-Program to display the adjacency matrix of the given graph.
-
-
- 
-/*#include<stdio.h> 
-int V; 
- 
-//init matrix to 0 
-void init(int arr[][V]) 
-{ 
-int i,j; 
-for(i = 0; i < V; i++) 
-for(j = 0; j < V; j++) 
-arr[i][j] = 0; 
-} 
-*/ 
-int main() 
-{ int e1,e2,me,n,i; 
-scanf("%d",&V); 
-int adjMatrix[V][V]; 
-init(adjMatrix); 
-n=V; 
-me=n*(n-1)/2; 
-for(i=0;i<me;i++) 
-{ 
-scanf("%d%d",&e1,&e2); 
-addEdge(adjMatrix,e1,e2); 
-if(e1==-1 && e2==-1) 
-{ 
-break; 
-} 
-} 
-printAdjMatrix(adjMatrix); 
- 
+class Node {
+    int data;
+    Node left, right;
+    Node(int data) {
+        this.data = data;
+        this.left = this.right = null;
+    }
 }
 
+public class Main {
+
+   
+    static Node buildTree(int[] arr) {
+        if (arr.length == 0) return null;
+        Node root = new Node(arr[0]);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        int i = 1;
+
+        while (!q.isEmpty() && i < arr.length) {
+            Node current = q.poll();
+            if (i < arr.length) {
+                current.left = new Node(arr[i++]);
+                q.add(current.left);
+            }
+            if (i < arr.length) {
+                current.right = new Node(arr[i++]);
+                q.add(current.right);
+            }
+        }
+
+        return root;
+    }
+
+    static int countNodes(Node root) {
+        if (root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+        Node root = buildTree(arr);
+
+        if (root.left == null) {
+            System.out.println(0);
+        } else {
+            System.out.println(countNodes(root.left));
+        }
+    }
+}
+
+*/
 ```
 
 ## Output:
-
-![image](https://github.com/user-attachments/assets/23be6457-de3b-4fb7-ab7e-cef887936f74)
+<img width="560" height="294" alt="image" src="https://github.com/user-attachments/assets/fa10c7ee-a15c-4ffa-8aa4-9830b3d138b0" />
 
 
 ## Result:
-Thus, the C program to print the adjacency matrix of the given graph is implemented successfully.
+The program has been successfully implemented and executed.
+It correctly constructs the binary tree from level order input and counts the number of nodes in the left subtree of the root node.
